@@ -4,7 +4,7 @@ This assignment requires controlling a robot in a visulization tools Gazebo and 
 
 ### Content Structure
 
-There are two packages **final_assignment** and **my_srv**. Each of these packages contain nodes which perform their assigned functionalities. Please find the breadown of these functionalities below. Beside this please also check the computational graph (rqt_graph) file separately attached with this repository.
+There are two packages **final_assignment** and **my_srv**. Each of these packages contain nodes which perform their assigned functionalities. Please find the breadown of these functionalities below.
 
 ## final_assignment Package
 
@@ -32,7 +32,7 @@ min:= 1 ; max:= 6
 
 2. In reply to this request, the server randomly generates a number within this range which we use for indexing in state 1. 
 
-## The rqt_graph of the program: 
+## Computation graph: 
 
 ![alt text](https://github.com/ShozabAbidi10/ResearchTrack_FinalAssignment/blob/main/rqt_graph.PNG)
 
