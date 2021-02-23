@@ -32,6 +32,10 @@ min:= 1 ; max:= 6
 
 2. In reply to this request, the server randomly generates a number within this range which we use for indexing in state 1. 
 
+## The rqt_graph of the program: 
+
+![alt text](https://github.com/ShozabAbidi10/ResearchTrack_FinalAssignment/blob/main/rqt_graph.PNG)
+
 ## Instruction to run the code
 
 1. Launched the simulator by executing the following command:
