@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-
-<launch>
-
-    <node pkg="final_assignment" type="wall_follow_service_m.py" name="wall_follower" />
-    <node pkg="final_assignment" type="f_a_user_interface.py" name="f_a_user_interface" output="screen" />
-
-</launch>
