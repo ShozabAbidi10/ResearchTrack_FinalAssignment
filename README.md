@@ -32,32 +32,43 @@ min:= 1 ; max:= 6
 
 2. In reply to this request, the server randomly generates a number within this range which we use for indexing in state 1. 
 
+## System Limitation:
+
+These are the following system limitations I came across during implementation.
+
+1. Once the target is achived the system 
+
 ## Computation graph: 
 
 ![alt text](https://github.com/ShozabAbidi10/ResearchTrack_FinalAssignment/blob/main/rqt_graph.PNG)
 
 ## Instruction to run the code
 
-1. Launched the simulator by executing the following command:
+1. Once you have successfully clone or downloaded this respository then execute the following command. Make sure your are in the ros workspace in your terminal.
+```
+catkin_make
+```
+
+2. Launched the gmapping simulation in Gazebo and Rviz by executing the following command:
 ```
 roslaunch final_assignment simulation_gmapping.launch
 ```
 
-2. Open a new terminal tab and launched the target_server (node2) so that it can provide new target position for the robot. Execute the command:
+3. Open a new terminal tab and execute the move_base.launch file by using following command.
 ```
 roslaunch final_assignment move_base.launch
 ```
 
-3. Open an other terminal tab and launched the assignment1_controller (node1) by executing the command:
+4. Open an other terminal tab and execute the wall follow service by using the following command:
 ```
 rosrun final_assignment wall_follow_service_m.py
 ```
 
-4. (Optional) You can check what information about robot the custom message is publishing in the topic assignment1/position by executing the following command. 
+5. Open an other terminal tab and launch f_a_target_server by using the following command. 
 ```
 rosrun my_srv f_a_target_server
 ```
-5. asas jaskasjjkas a
+6. Finally launch the main user interface file by using the following command. 
 ```
 rosrun final_assignment f_a_user_interface.py
 ```
