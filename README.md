@@ -32,12 +32,6 @@ min:= 1 ; max:= 6
 
 2. In reply to this request, the server randomly generates a number within this range which we use for indexing in state 1. 
 
-## System Limitation:
-
-These are the following system limitations I came across during implementation.
-
-1. Once the target is achived the system 
-
 ## Computation graph: 
 
 ![alt text](https://github.com/ShozabAbidi10/ResearchTrack_FinalAssignment/blob/main/rqt_graph.PNG)
