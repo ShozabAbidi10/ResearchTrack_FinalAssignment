@@ -4,21 +4,33 @@ This assignment requires controlling a robot in a visulization tools Gazebo and 
 
 ### Content Structure
 
-There are two packages **final_assignment** and **my_srv**. Each of these packages contain nodes which perform their assigned functionalities. Please find the breadown of these functionalities below. Beside this please also check the rqt_graph file separately attached with this repository.
+There are two packages **final_assignment** and **my_srv**. Each of these packages contain nodes which perform their assigned functionalities. Please find the breadown of these functionalities below. Beside this please also check the computational graph (rqt_graph) file separately attached with this repository.
 
 ## final_assignment Package
 
-In final_assignment package we have created one ROS node with name assignment1_controller (node1) as well. For this node there is a cpp file with name assignment1_controller.cpp. This node perform following functionalities:
+In final_assignment package we have multiple components such as house.world file which is our simulation environment. For execution purposes of this simulation environment we use simuation_gmapping.launch file which present in the launch folder. Beside this we also have Sim.rviz file in config folder. Since we our using move_base technique for localization and mapping the simulation environment, therefore we also a have move_base.launch file in launch folder whcih is executing all its required folder. 
 
-1. It subscribe to the /odom topic and using nav_msgs/Odometry it captures the current position of robot. For this, there is a subscriber implemented in this node. 
-2. Once the current position of the robot is captures the node checks if the difference between the current position and target position is less then 0.1. If this condition satisfy then the node send the request to the target_server (node2) which send back the new target coordinates between range from -6.0 to 6.0. For this, there is a ROS client implemented in this node. 
-3. If this condition doesn't satisfy then the node pulishes linear x and y speed of the robot using cmd_vel. For this, there is a ROS publisher implemented in this node. 
-5. There is another publisher implemented in this node that publishes a custom message in topic assignment1/position. This message contains msg name, robot current position x coordinate, robot current position y coordinate, robot new target position x coordinate, robot new target position y coordinate and distance between current and target x and y coordinates. This msg was implemented just debuging purposes.
+To acomodate the 'follow_wall' functionality of the robot, we have a wall_follow_service_m.py file in the scripts folder which allow robot to move continously along the wall. Beside this we have a main file named 'f_a_user_interface' (f_a_user_interface is stands for final_assignment) which handles all the user interface related functionalities along with merging other nodes. The details of the functionalities performed in this node is explain below.
+
+This node perform following functionalities:
+
+1. In this node we have initialized two service clients one for 'f_a_target_server' in order to recieve random target index and one for robot wall follower script which basically allows to robot to follow walls as mentioned above.  
+2. There is one subscriber initialized to '/move_base/status' topic of type GoalStatusArray which we use to see weather the robot has reached its target or not. 
+3. There are two publishers also initialized in this node one to publish the robot's new target values in the topic '/move_base/goal' and the second one to publish robot's velocities in the '/cmd_vel' topic. 
+4. The user interface is designed to allow user to decide which state of the robot they want execute out of total four. 
+	    a) In the first state, the robot randomly choose the new target position values from a set of six predefined positions. Once the robot has reached to its target position the user has the option to keep it this state or change it to something else. In order to achive this behaviour we first send request to f_a_target_server for random target index then by using this index value we set the new target positionn for robot. Once the new target position has been set we publish these values to '/move_base/status' topic.  
+     b) In the second state, the robot ask the user to choose the new target position from the list of six predefined positions. Again, once the robot has reached to its target position the user will have the option change the state or keep it as it is. We achive this behaviour of robot by first finalizing the robot's new target values using user's input and then publishing it on '/move_base/status' topic.   
+     c) In the third state, the robot follow the simulated environment wall using the wall follower service clinet.
+     d) In the fourth state, the robot get stop to its position. We do it by publishing the robot's velocity values as zero in '/cmd_vel' topic. 
 
 ## my_srv Package
 
-1. This node implement a ROS server which request for the min and max value of x and y coordinates of the new target positon. 
-2. In reply to this request, it randomly generates a new target position for the robot and sent it to assignment1_controlller (node1)
+1. This node implement a ROS f_a_target_server which request for the min and max values which in our case are as follows: 
+```
+min:= 1 ; max:= 6
+```
+
+2. In reply to this request, the server randomly generates a number within this range which we use for indexing in state 1. 
 
 ## Instruction to run the code
 
