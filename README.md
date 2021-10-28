@@ -1,4 +1,4 @@
-# Research_Track FinalAssignment:
+# Assignment 2 of the Research Track 1 course (MSc Robotics Engineering, Unige)
 
 This assignment requires controlling a robot in visualization tools Gazebo and Rviz using planning algorithm move_base and follow wall.
 
